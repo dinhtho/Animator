@@ -8,44 +8,54 @@
     android:orientation="vertical"
     tools:context="com.example.pcpv.animator.MainActivity">
 
-    <LinearLayout
-        android:gravity="bottom|center_horizontal"
-        android:layout_weight="1.5"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp">
+        android:layout_height="0dp"
+        android:layout_weight="1.5">
+
         <ImageView
-            android:src="@mipmap/ic_launcher"
             android:id="@+id/iv_logo"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/ic_launcher" />
+
+        <com.example.pcpv.animator.lib.AnimatedPathView
+            android:id="@+id/animated_path"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/bt_scale_XY"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="animator Scale" />
+
+        <Button
+            android:id="@+id/bt_translationXY"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="animator translation" />
+
+        <Button
+            android:id="@+id/bt_rotationXY"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="animator rotation" />
+
+        <Button
+            android:id="@+id/bt_XY"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="animator xy" />
+
     </LinearLayout>
-
-<LinearLayout
-    android:orientation="vertical"
-    android:layout_weight="1"
-    android:layout_width="match_parent"
-    android:layout_height="0dp">
-    <Button
-        android:text="animator Scale"
-        android:id="@+id/bt_scale_XY"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <Button
-        android:text="animator translation"
-        android:id="@+id/bt_translationXY"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <Button
-        android:text="animator rotation"
-        android:id="@+id/bt_rotationXY"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <Button
-        android:text="animator xy"
-        android:id="@+id/bt_XY"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-</LinearLayout>
 
 </LinearLayout>

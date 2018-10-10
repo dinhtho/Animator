@@ -11,7 +11,12 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewTreeObserver;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
+
+import com.example.pcpv.animator.lib.AnimatedPathView;
 
 public class MainActivity extends AppCompatActivity {
     private ImageView ivLogo;
@@ -21,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ivLogo = findViewById(R.id.iv_logo);
+
+        initAnimatedPathView();
 
         findViewById(R.id.bt_scale_XY).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -179,6 +186,34 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void initAnimatedPathView() {
+        final AnimatedPathView animatedPathView = findViewById(R.id.animated_path);
+
+        ViewTreeObserver observer = animatedPathView.getViewTreeObserver();
+        if (observer != null) {
+            observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    animatedPathView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+
+                    float[][] points = new float[][]{
+                            {0, 0},
+                            {animatedPathView.getWidth(), 0},
+                            {animatedPathView.getWidth(), animatedPathView.getHeight()},
+                            {0, animatedPathView.getHeight()},
+                            {0, 0},
+                    };
+                    animatedPathView.setPath(points);
+                }
+            });
+        }
+        ObjectAnimator anim = ObjectAnimator.ofFloat(animatedPathView, "percentage", 0.0f, 1.0f);
+        anim.setDuration(2000);
+        anim.setRepeatCount(Animation.INFINITE);
+        anim.setInterpolator(new LinearInterpolator());
+        anim.start();
     }
 }
 
